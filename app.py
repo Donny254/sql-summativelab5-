@@ -4,9 +4,9 @@ from marshmallow import Schema, fields, validate, ValidationError
 from models import db, Exercise, Workout, WorkoutExercise
 import os
 
-app = Flask(_name_)
+app = Flask(__name__)
 # Absolute path to avoid database mismatch issues
-basedir = os.path.abspath(os.path.dirname(_file_))
+basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -97,5 +97,5 @@ def add_exercise_to_workout(w_id, e_id):
     db.session.commit()
     return make_response(workout_ex_schema.dump(new_we), 201)
 
-if _name_ == '_main_':
+if __name__ == '_main_':
     app.run(host='0.0.0.0', port=5555, debug=True)

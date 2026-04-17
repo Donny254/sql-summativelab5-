@@ -5,7 +5,7 @@ from sqlalchemy import CheckConstraint
 db = SQLAlchemy()
 
 class Exercise(db.Model):
-    _tablename_ = 'exercises'
+    __tablename__ = 'exercises'
     # Layer 1: Table Constraint (Name length)
     _table_args_ = (CheckConstraint('length(name) >= 3', name='name_min_length'),)
 
@@ -24,7 +24,7 @@ class Exercise(db.Model):
         return name
 
 class Workout(db.Model):
-    _tablename_ = 'workouts'
+    __tablename__ = 'workouts'
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String, nullable=False)
     duration_minutes = db.Column(db.Integer)
@@ -39,7 +39,7 @@ class Workout(db.Model):
         return duration
 
 class WorkoutExercise(db.Model):
-    _tablename_ = 'workout_exercises'
+    __tablename__ = 'workout_exercises'
     # Layer 1: Table Constraint (Reps cannot be negative)
     _table_args_ = (CheckConstraint('reps >= 0', name='reps_positive'),)
     
