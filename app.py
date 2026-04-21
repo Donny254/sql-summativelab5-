@@ -97,5 +97,5 @@ def add_exercise_to_workout(w_id, e_id):
     db.session.commit()
     return make_response(workout_ex_schema.dump(new_we), 201)
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5555, debug=True)

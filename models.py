@@ -7,7 +7,7 @@ db = SQLAlchemy()
 class Exercise(db.Model):
     __tablename__ = 'exercises'
     # Layer 1: Table Constraint (Name length)
-    _table_args_ = (CheckConstraint('length(name) >= 3', name='name_min_length'),)
+    __table_args__ = (CheckConstraint('length(name) >= 3', name='name_min_length'),)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=True)
@@ -41,7 +41,7 @@ class Workout(db.Model):
 class WorkoutExercise(db.Model):
     __tablename__ = 'workout_exercises'
     # Layer 1: Table Constraint (Reps cannot be negative)
-    _table_args_ = (CheckConstraint('reps >= 0', name='reps_positive'),)
+    __table_args__ = (CheckConstraint('reps >= 0', name='reps_positive'),)
     
     id = db.Column(db.Integer, primary_key=True)
     workout_id = db.Column(db.Integer, db.ForeignKey('workouts.id'), nullable=False)
